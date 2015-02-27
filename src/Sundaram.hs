@@ -4,6 +4,9 @@ module Sundaram where
 -- サンダラムの篩
 -- http://en.wikipedia.org/wiki/Sieve_of_Sundaram
 
+-- package: llrbtree
+import qualified Data.Set.LLRBTree as RB
+
 primes :: (Num n, Ord n, Enum n, Integral n) => n -> [n]
 primes limit = 2 : remainders'
   where remainders  = toOddNumbers $ filteredSource limit'
@@ -14,7 +17,8 @@ filteredSource :: (Eq n, Ord n, Num n, Enum n) => n -> [n]
 filteredSource limit = filter isTarget numbers
   where excusion = fromN limit
         numbers  = [1..limit]
-        isTarget = (`notElem` excusion) -- todo: もっと速いアルゴリズム
+        exTree   = RB.fromList excusion
+        isTarget = not . (`RB.member` exTree)
 
 toOddNumbers :: (Num n) => [n] -> [n]
 toOddNumbers = fmap toOdd
