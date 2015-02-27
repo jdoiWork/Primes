@@ -1,10 +1,31 @@
 module Sundaram where
-import Control.Monad
-import Data.List
- 
-fromN :: Int -> [Int]
+
+-- Sieve of Sundaram
+-- サンダラムの篩
+-- http://en.wikipedia.org/wiki/Sieve_of_Sundaram
+
+primes :: (Num n, Ord n, Enum n, Integral n) => n -> [n]
+primes limit = 2 : remainders'
+  where remainders  = toOddNumbers $ filteredSource limit'
+        remainders' = takeWhile (<=limit) remainders
+        limit'      = limit `div` 2 + 1 
+
+filteredSource :: (Eq n, Ord n, Num n, Enum n) => n -> [n]
+filteredSource limit = filter isTarget numbers
+  where excusion = fromN limit
+        numbers  = [1..limit]
+        isTarget = (`notElem` excusion) -- todo: もっと速いアルゴリズム
+
+toOddNumbers :: (Num n) => [n] -> [n]
+toOddNumbers = fmap toOdd
+
+toOdd :: (Num n) => n -> n
+toOdd = (+1) . (*2)
+
+fromN :: (Num n, Ord n, Enum n) => n -> [n]
 fromN n = do
-  i <- takeWhile (\a -> ii a <= n) [1..n]
-  takeWhile      (\j -> x i j <=n) [i..n]
-    where ii a = 2 * a * (a + 1)
-          x i j = i + j + 2 * i * j 
+  i <- takeWhile (lten . ii) [1..n]
+  takeWhile lten $ map (x i) [i..n]
+    where ii a  = 2 * a * ( 1 + a )
+          x i j = i + j + 2 * i * j
+          lten  = (<=n) 
