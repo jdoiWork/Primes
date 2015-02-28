@@ -1,4 +1,4 @@
-module Eratosthenes where
+module Eratosthenes (primes) where
 
 -- Sieve of Eratosthenes
 -- エラトステネスの篩

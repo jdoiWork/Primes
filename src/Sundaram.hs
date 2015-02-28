@@ -1,11 +1,11 @@
-module Sundaram where
+module Sundaram (primes) where
 
 -- Sieve of Sundaram
 -- サンダラムの篩
 -- http://en.wikipedia.org/wiki/Sieve_of_Sundaram
 
 -- package: llrbtree
-import qualified Data.Set.LLRBTree as RB
+import qualified Data.Set.LLRBTree as RB (fromList, member)
 
 primes :: (Num n, Ord n, Enum n, Integral n) => n -> [n]
 primes limit = 2 : remainders'
