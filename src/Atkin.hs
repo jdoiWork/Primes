@@ -5,11 +5,13 @@ module Atkin (primes) where
 -- http://en.wikipedia.org/wiki/Sieve_of_Atkin
 -- http://stackoverflow.com/questions/10580159/sieve-of-atkin-explanation-and-java-example
 
-import Data.Array (Array, array, assocs, accum, (//))
+import Data.Array.Diff (DiffUArray, array, assocs, accum, (//))
+-- import Data.Array (Array, array, assocs, accum, (//))
 import Data.List  (foldl')
 
 type IntX  = Integer
-type Sieve = Array IntX Bool
+type Sieve = DiffUArray IntX Bool
+-- type Sieve = Array IntX Bool
 type RF    = IntX -> IntX -> IntX -> [IntX]
 
 primes :: IntX -> [IntX]

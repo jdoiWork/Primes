@@ -25,5 +25,6 @@ library
   build-depends:       base >=4.7 && <4.8
                        , llrbtree
                        , array
+                       , diffarray
   hs-source-dirs:      src
   default-language:    Haskell2010
