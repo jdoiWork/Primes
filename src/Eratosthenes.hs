@@ -1,4 +1,4 @@
-module Eratosthenes (primes) where
+module Eratosthenes (primes, primes') where
 
 -- Sieve of Eratosthenes
 -- エラトステネスの篩
@@ -15,3 +15,7 @@ sieve z (n:ns) ps             = sieve z ns' ps'
   where ps' = n:ps
         ns' = filter f ns
         f x = x `mod` n /= 0
+
+primes' = sieve' [2..] 
+  where sieve' (p:xs) = 
+          p : sieve' [x | x <- xs, x `mod` p /= 0]
